@@ -9,15 +9,26 @@ const connectDB = require("./config/db");
 
 const app = express();
 
-// ── Middlewares ──
+const defaultOrigins = [
+  "http://localhost:3000", // admin-web
+  "http://localhost:3002", // company-app
+  "http://localhost:8081", // expo dev
+  "http://localhost:19006", // expo web
+];
+
+const allowedOrigins = process.env.ALLOWED_ORIGINS
+  ? process.env.ALLOWED_ORIGINS.split(",")
+  : defaultOrigins;
+
 app.use(
   cors({
-    origin: [
-      "http://localhost:3000", // admin-web
-      "http://localhost:3002", // company-app
-      "http://localhost:8081", // expo dev
-      "http://localhost:19006", // expo web
-    ],
+    origin: function(origin, callback) {
+      if (!origin || allowedOrigins.indexOf(origin) !== -1 || allowedOrigins.includes('*')) {
+        callback(null, true);
+      } else {
+        callback(new Error('Not allowed by CORS'));
+      }
+    },
     credentials: true,
   })
 );

@@ -13,8 +13,8 @@ RUN npm install
 # Copy the rest of the application code to the working directory
 COPY . .
 
-# Expose the port the app runs on (Server runs on 3001 by default)
-EXPOSE 3001
+# Expose the port the app runs on (Cloud Run defaults to 8080)
+EXPOSE 8080
 
 # Command to start the application
 CMD [ "npm", "start" ]
