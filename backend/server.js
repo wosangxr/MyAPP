@@ -35,6 +35,17 @@ app.use(
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
+// ── Root Endpoint ──
+app.get("/", (req, res) => {
+  res.send(`
+    <div style="font-family: system-ui, sans-serif; text-align: center; padding: 50px; background: #f8f9fa; height: 100vh; margin: 0; box-sizing: border-box;">
+      <h1 style="color: #6c5ce7; font-size: 3rem; margin-bottom: 10px;">🚀 HelpAPP API is Online</h1>
+      <p style="font-size: 1.2rem; color: #636e72;">The backend server has been successfully deployed to Google Cloud.</p>
+      <p style="margin-top: 20px;"><a href="/api/health" style="padding: 10px 20px; background: #6c5ce7; color: white; text-decoration: none; border-radius: 5px; font-weight: bold;">Check API Health</a></p>
+    </div>
+  `);
+});
+
 // ── Health Check ──
 app.get("/api/health", (req, res) => {
   res.json({
