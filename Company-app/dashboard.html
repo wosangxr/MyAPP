@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard — Company Test</title>
+    <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body class="app-page">
+    <div class="bg-orbs">
+        <div class="orb orb-1"></div>
+        <div class="orb orb-2"></div>
+    </div>
+    <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+    <div class="app-layout">
+        <nav class="sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <div class="logo"><i class="bx bx-buildings"></i><span>Company Test</span></div>
+                <button class="sidebar-close" id="sidebarClose"><i class="bx bx-x"></i></button>
+            </div>
+            <div class="sidebar-menu">
+                <a href="dashboard.html" class="menu-item active" id="menuDashboard"><i class="bx bx-grid-alt"></i><span>Dashboard</span></a>
+                <a href="jobs.html" class="menu-item" id="menuJobs"><i class="bx bx-briefcase"></i><span>ประกาศงาน</span></a>
+                <a href="applicants.html" class="menu-item" id="menuApplicants"><i class="bx bx-user-check"></i><span>ผู้สมัคร</span></a>
+                <a href="search.html" class="menu-item" id="menuSearch"><i class="bx bx-search-alt"></i><span>ค้นหาเรซูเม่</span></a>
+                <a href="profile.html" class="menu-item" id="menuProfile"><i class="bx bx-building-house"></i><span>โปรไฟล์บริษัท</span></a>
+                <a href="settings.html" class="menu-item" id="menuSettings"><i class="bx bx-cog"></i><span>ตั้งค่าองค์กร</span></a>
+            </div>
+
+            <div class="sidebar-footer">
+                <button id="themeToggle"><i class="bx bx-sun"></i><span id="btnThemeText">เปลี่ยนธีม</span></button>
+                <button id="sidebarLangToggle">EN</button>
+                <button class="logout-btn" id="logoutBtn"><i class="bx bx-log-out"></i><span id="btnLogoutText">ออกจากระบบ</span></button>
+            </div>
+
+        </nav>
+
+        <main class="main-content">
+            <header class="top-bar">
+                <button class="menu-toggle" id="menuToggle"><i class="bx bx-menu"></i></button>
+                <h1 class="page-title">Dashboard</h1>
+                <div class="user-info">
+                    <div class="avatar" id="userAvatar">C</div>
+                    <span id="userName">Company</span>
+                </div>
+            </header>
+
+            <div class="content-area">
+                <!-- Stats Cards -->
+                <div class="stats-grid" id="statsGrid">
+                    <div class="stat-card">
+                        <div class="stat-icon purple"><i class="bx bx-briefcase"></i></div>
+                        <div class="stat-info">
+                            <h4>งานที่กำลังเปิดรับ</h4>
+                            <div class="stat-number" id="statJobs">0</div>
+                            <div class="stat-change up"><i class="bx bx-check"></i> Active Jobs</div>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon green"><i class="bx bx-user-plus"></i></div>
+                        <div class="stat-info">
+                            <h4>ผู้สมัครใหม่ (สัปดาห์นี้)</h4>
+                            <div class="stat-number" id="statNewApplicants">0</div>
+                            <div class="stat-change up"><i class="bx bx-trending-up"></i> ยังไม่ได้อ่าน</div>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon orange"><i class="bx bx-time-five"></i></div>
+                        <div class="stat-info">
+                            <h4>รอดำเนินการ (Pending)</h4>
+                            <div class="stat-number" id="statPending">0</div>
+                            <div class="stat-change"><i class="bx bx-minus"></i> รายการ</div>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon blue"><i class="bx bx-conversation"></i></div>
+                        <div class="stat-info">
+                            <h4>รอสัมภาษณ์</h4>
+                            <div class="stat-number" id="statInterview">0</div>
+                            <div class="stat-change up"><i class="bx bx-calendar-event"></i> นัดหมายแล้ว</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Charts + To-Do -->
+                <div class="grid-2">
+                    <div class="section-card">
+                        <div class="section-header">
+                            <h2><i class="bx bx-line-chart"></i> สถิติยอดดูเทียบกับการสมัคร (Views vs Applies)</h2>
+                        </div>
+                        <div class="chart-container">
+                            <canvas id="viewsVsAppliesChart"></canvas>
+                        </div>
+                    </div>
+                    <div class="section-card">
+                        <div class="section-header">
+                            <h2><i class="bx bx-bell"></i> To-do List & แจ้งเตือน</h2>
+                        </div>
+                        <div class="todo-list" style="display: flex; flex-direction: column; gap: 1rem; margin-top: 1rem;">
+                            <div style="display: flex; align-items: flex-start; gap: 1rem; background: var(--bg-hover); padding: 1rem; border-radius: var(--radius-md); border-left: 4px solid var(--success);">
+                                <i class="bx bx-file" style="font-size: 1.5rem; color: var(--success);"></i>
+                                <div>
+                                    <h4 style="font-size: 0.95rem; margin-bottom: 0.2rem;">เรซูเม่ใหม่ที่เพิ่งเข้ามาวันนี้</h4>
+                                    <p style="font-size: 0.85rem; color: var(--text-muted);">มีผู้สมัครใหม่ 3 คนในตำแหน่ง Full Stack Developer</p>
+                                </div>
+                            </div>
+                            <div style="display: flex; align-items: flex-start; gap: 1rem; background: var(--bg-hover); padding: 1rem; border-radius: var(--radius-md); border-left: 4px solid var(--warning);">
+                                <i class="bx bx-time-five" style="font-size: 1.5rem; color: var(--warning);"></i>
+                                <div>
+                                    <h4 style="font-size: 0.95rem; margin-bottom: 0.2rem;">งานที่ใกล้หมดอายุประกาศ</h4>
+                                    <p style="font-size: 0.85rem; color: var(--text-muted);">ประกาศตำแหน่ง UX/UI Designer (ดราฟท์) ปล่อยทิ้งไว้นาน</p>
+                                </div>
+                            </div>
+                            <div style="display: flex; align-items: flex-start; gap: 1rem; background: var(--bg-hover); padding: 1rem; border-radius: var(--radius-md); border-left: 4px solid var(--info);">
+                                <i class="bx bx-conversation" style="font-size: 1.5rem; color: var(--info);"></i>
+                                <div>
+                                    <h4 style="font-size: 0.95rem; margin-bottom: 0.2rem;">นัดสัมภาษณ์วันนี้</h4>
+                                    <p style="font-size: 0.85rem; color: var(--text-muted);">เวลา 14:00 น. คุณณัฐพล สร้างสรรค์</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Recent Applications -->
+                <div class="section-card">
+                    <div class="section-header">
+                        <h2><i class="bx bx-user-plus"></i> ใบสมัครล่าสุด</h2>
+                        <a href="applicants.html" class="btn btn-ghost btn-sm">ดูทั้งหมด <i class="bx bx-right-arrow-alt"></i></a>
+                    </div>
+                    <div id="recentApplications">
+                        <div class="loading"><div class="spinner"></div></div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <div id="toast" class="toast">
+        <i class="bx bx-check-circle"></i>
+        <div class="toast-content">
+            <h4>สำเร็จ!</h4>
+            <p id="toastMessage">ดำเนินการเรียบร้อยแล้ว</p>
+        </div>
+    </div>
+
+    <script src="https://www.gstatic.com/firebasejs/12.12.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/12.12.0/firebase-auth-compat.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4"></script>
+    <script src="app.js"></script>
+</body>
+</html>

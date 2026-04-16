@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>โปรไฟล์บริษัท — Company Test</title>
+    <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body class="app-page">
+    <div class="bg-orbs"><div class="orb orb-1"></div><div class="orb orb-2"></div></div>
+    <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+    <div class="app-layout">
+        <nav class="sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <div class="logo"><i class="bx bx-buildings"></i><span>Company Test</span></div>
+                <button class="sidebar-close" id="sidebarClose"><i class="bx bx-x"></i></button>
+            </div>
+            <div class="sidebar-menu">
+                <a href="dashboard.html" class="menu-item" id="menuDashboard"><i class="bx bx-grid-alt"></i><span>Dashboard</span></a>
+                <a href="jobs.html" class="menu-item" id="menuJobs"><i class="bx bx-briefcase"></i><span>ประกาศงาน</span></a>
+                <a href="applicants.html" class="menu-item" id="menuApplicants"><i class="bx bx-user-check"></i><span>ผู้สมัคร</span></a>
+                <a href="search.html" class="menu-item" id="menuSearch"><i class="bx bx-search-alt"></i><span>ค้นหาเรซูเม่</span></a>
+                <a href="profile.html" class="menu-item active" id="menuProfile"><i class="bx bx-building-house"></i><span>โปรไฟล์บริษัท</span></a>
+                <a href="settings.html" class="menu-item" id="menuSettings"><i class="bx bx-cog"></i><span>ตั้งค่าองค์กร</span></a>
+            </div>
+            <div class="sidebar-footer">
+                <button id="themeToggle"><i class="bx bx-sun"></i><span id="btnThemeText">เปลี่ยนธีม</span></button>
+                <button id="sidebarLangToggle">EN</button>
+                <button class="logout-btn" id="logoutBtn"><i class="bx bx-log-out"></i><span id="btnLogoutText">ออกจากระบบ</span></button>
+            </div>
+        </nav>
+
+        <main class="main-content">
+            <header class="top-bar">
+                <button class="menu-toggle" id="menuToggle"><i class="bx bx-menu"></i></button>
+                <h1 class="page-title">โปรไฟล์บริษัท</h1>
+                <div class="user-info">
+                    <div class="avatar" id="userAvatar">C</div>
+                    <span id="userName">Company</span>
+                </div>
+            </header>
+
+            <div class="content-area">
+                <div class="section-card">
+                    <!-- Logo + Company name header -->
+                    <div class="profile-header">
+                        <div class="logo-upload" id="logoUpload">
+                            <i class="bx bx-camera" id="logoPlaceholder"></i>
+                            <span id="logoText">อัปโหลดโลโก้</span>
+                            <input type="file" id="logoInput" accept="image/*" style="display: none;">
+                        </div>
+                        <div class="profile-title">
+                            <h1 id="profileCompanyName">ชื่อบริษัทของคุณ</h1>
+                            <p id="profileIndustry">กรอกข้อมูลบริษัทเพื่อเริ่มต้นใช้งาน</p>
+                        </div>
+                    </div>
+
+                    <form id="profileForm">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="companyName">ชื่อบริษัท *</label>
+                                <input type="text" class="form-control" id="companyName" placeholder="บริษัท ... จำกัด" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="industry">อุตสาหกรรม</label>
+                                <select class="form-control" id="industry">
+                                    <option value="">เลือกอุตสาหกรรม...</option>
+                                    <option value="เทคโนโลยีสารสนเทศ">เทคโนโลยีสารสนเทศ</option>
+                                    <option value="การเงิน">การเงิน / ธนาคาร</option>
+                                    <option value="การตลาด">การตลาด / โฆษณา</option>
+                                    <option value="การผลิต">การผลิต / อุตสาหกรรม</option>
+                                    <option value="สุขภาพ">สุขภาพ / การแพทย์</option>
+                                    <option value="การศึกษา">การศึกษา</option>
+                                    <option value="อีคอมเมิร์ซ">อีคอมเมิร์ซ / ค้าปลีก</option>
+                                    <option value="อสังหาริมทรัพย์">อสังหาริมทรัพย์</option>
+                                    <option value="อื่นๆ">อื่นๆ</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="companySize">ขนาดบริษัท</label>
+                                <select class="form-control" id="companySize">
+                                    <option value="">เลือก...</option>
+                                    <option value="1-10 คน">1-10 คน</option>
+                                    <option value="11-50 คน">11-50 คน</option>
+                                    <option value="51-200 คน">51-200 คน</option>
+                                    <option value="201-500 คน">201-500 คน</option>
+                                    <option value="500+ คน">500+ คน</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="location">ที่ตั้ง</label>
+                                <input type="text" class="form-control" id="location" placeholder="เช่น กรุงเทพฯ, ราชเทวี">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="description">เกี่ยวกับบริษัท</label>
+                            <textarea class="form-control" id="description" rows="4" placeholder="อธิบายเกี่ยวกับบริษัท วิสัยทัศน์ และวัฒนธรรมองค์กร..."></textarea>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="website">เว็บไซต์</label>
+                                <input type="url" class="form-control" id="website" placeholder="https://example.com">
+                            </div>
+                            <div class="form-group">
+                                <label for="contactEmail">อีเมลติดต่อ</label>
+                                <input type="email" class="form-control" id="contactEmail" placeholder="hr@company.com">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="contactPhone">เบอร์โทรศัพท์</label>
+                            <input type="tel" class="form-control" id="contactPhone" placeholder="02-xxx-xxxx" style="max-width: 300px;">
+                        </div>
+
+                        <hr style="border:0; border-top: 1px solid var(--border-color); margin: 2rem 0;">
+
+                        <h3 style="font-size: 1.1rem; margin-bottom: 1rem;"><i class="bx bx-heart"></i> วัฒนธรรมองค์กร & สวัสดิการ</h3>
+                        <div class="form-group">
+                            <label for="companyCulture">เวลาทำงาน & รูปแบบการทำงาน</label>
+                            <input type="text" class="form-control" id="companyCulture" placeholder="เช่น จันทร์-ศุกร์ (Flexible Hours), WFH 2 วัน/สัปดาห์">
+                        </div>
+                        <div class="form-group">
+                            <label for="companyPerks">สวัสดิการเพิ่มเติม (คั่นด้วยจุลภาค)</label>
+                            <input type="text" class="form-control" id="companyPerks" placeholder="เช่น ประกันสุขภาพ, กองทุนสำรองเลี้ยงชีพ, วันหยุดประจำปี 15 วัน, MacBook Pro">
+                            <div style="display:flex; gap:0.5rem; margin-top:0.5rem; flex-wrap:wrap;">
+                                <span class="badge badge-active">ประกันสุขภาพ</span>
+                                <span class="badge badge-active">WFH</span>
+                            </div>
+                        </div>
+
+                        <hr style="border:0; border-top: 1px solid var(--border-color); margin: 2rem 0;">
+
+                        <h3 style="font-size: 1.1rem; margin-bottom: 1rem;"><i class="bx bx-image"></i> บรรยากาศออฟฟิศ & สถานที่ (Office Gallery)</h3>
+                        <div class="form-group">
+                            <label>รูปภาพออฟฟิศ / ทีมงาน (สูงสุด 5 รูป)</label>
+                            <div style="display: flex; gap: 1rem; margin-top: 0.5rem; flex-wrap: wrap;">
+                                <div style="width: 100px; height: 100px; background: var(--bg-input); border: 2px dashed var(--border-color); border-radius: var(--radius-md); display:flex; align-items:center; justify-content:center; cursor:pointer;" title="อัปโหลดรูปภาพ">
+                                    <i class="bx bx-plus" style="font-size: 2rem; color: var(--text-muted);"></i>
+                                </div>
+                                <div style="width: 100px; height: 100px; background: url('https://picsum.photos/200/200?random=1') center/cover; border-radius: var(--radius-md);"></div>
+                                <div style="width: 100px; height: 100px; background: url('https://picsum.photos/200/200?random=2') center/cover; border-radius: var(--radius-md);"></div>
+                            </div>
+                        </div>
+                        <div class="form-group" style="margin-top: 1.5rem;">
+                            <label for="googleMapsLink">ลิงก์ Google Maps</label>
+                            <input type="url" class="form-control" id="googleMapsLink" placeholder="https://goo.gl/maps/...">
+                        </div>
+
+                        <div style="display: flex; gap: 0.75rem; margin-top: 1.5rem;">
+                            <button type="submit" class="btn btn-primary"><i class="bx bx-save"></i> บันทึกข้อมูล</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <div id="toast" class="toast">
+        <i class="bx bx-check-circle"></i>
+        <div class="toast-content"><h4>สำเร็จ!</h4><p id="toastMessage"></p></div>
+    </div>
+
+    <script src="https://www.gstatic.com/firebasejs/12.12.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/12.12.0/firebase-auth-compat.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>

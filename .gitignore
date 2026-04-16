@@ -1,0 +1,46 @@
+# Dependencies
+node_modules/
+.pnp
+.pnp.js
+
+# Environment / Secrets
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+firebase-service-account.json
+
+# Build / Production
+dist/
+build/
+web-build/
+.expo/
+coverage/
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# OS Junk
+.DS_Store
+Thumbs.db
+*.pem
+*.jks
+*.p8
+*.p12
+*.key
+*.mobileprovision
+
+# IDEs
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Sub-directory specific (if any)
+backend/.env
+Company-app/.env
+admin-web/.env
+smart-career-app/.env

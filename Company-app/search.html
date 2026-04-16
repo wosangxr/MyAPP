@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ค้นหาผู้สมัคร — Company Test</title>
+    <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body class="app-page">
+    <div class="bg-orbs"><div class="orb orb-1"></div><div class="orb orb-2"></div></div>
+    <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+    <div class="app-layout">
+        <nav class="sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <div class="logo"><i class="bx bx-buildings"></i><span>Company Test</span></div>
+                <button class="sidebar-close" id="sidebarClose"><i class="bx bx-x"></i></button>
+            </div>
+            <div class="sidebar-menu">
+                <a href="dashboard.html" class="menu-item" id="menuDashboard"><i class="bx bx-grid-alt"></i><span>Dashboard</span></a>
+                <a href="jobs.html" class="menu-item" id="menuJobs"><i class="bx bx-briefcase"></i><span>ประกาศงาน</span></a>
+                <a href="applicants.html" class="menu-item" id="menuApplicants"><i class="bx bx-user-check"></i><span>ผู้สมัคร</span></a>
+                <a href="search.html" class="menu-item active" id="menuSearch"><i class="bx bx-search-alt"></i><span>ค้นหาเรซูเม่</span></a>
+                <a href="profile.html" class="menu-item" id="menuProfile"><i class="bx bx-building-house"></i><span>โปรไฟล์บริษัท</span></a>
+                <a href="settings.html" class="menu-item" id="menuSettings"><i class="bx bx-cog"></i><span>ตั้งค่าองค์กร</span></a>
+            </div>
+            <div class="sidebar-footer">
+                <button id="themeToggle"><i class="bx bx-sun"></i><span id="btnThemeText">เปลี่ยนธีม</span></button>
+                <button id="sidebarLangToggle">EN</button>
+                <button class="logout-btn" id="logoutBtn"><i class="bx bx-log-out"></i><span id="btnLogoutText">ออกจากระบบ</span></button>
+            </div>
+
+        </nav>
+
+        <main class="main-content">
+            <header class="top-bar">
+                <button class="menu-toggle" id="menuToggle"><i class="bx bx-menu"></i></button>
+                <h1 class="page-title">Proactive Sourcing</h1>
+                <div class="user-info">
+                    <div class="avatar" id="userAvatar">C</div>
+                    <span id="userName">Company</span>
+                </div>
+            </header>
+
+            <div class="content-area">
+                <div class="grid-2" style="grid-template-columns: 320px 1fr; align-items: start;">
+                    <!-- Filter Sidebar -->
+                    <div class="glass-card" style="padding: 1.5rem;">
+                        <h3 style="margin-bottom: 1.5rem; font-size: 1.1rem; display:flex; align-items:center; gap: 8px;">
+                            <i class="bx bx-filter"></i> ตัวกรองค้นหา
+                        </h3>
+                        
+                        <div class="form-group">
+                            <label>คำค้นหา (Keyword)</label>
+                            <input type="text" class="form-control" placeholder="ชื่อตำแหน่ง, ทักษะ, บริษัทเก่า">
+                        </div>
+
+                        <div class="form-group">
+                            <label>สายงาน / หมวดหมู่</label>
+                            <select class="form-control">
+                                <option value="">เลือกหมวดหมู่</option>
+                                <option value="IT">IT / Programmer</option>
+                                <option value="Design">Design / UX/UI</option>
+                                <option value="Marketing">Marketing</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label>ประสบการณ์การทำงาน (ปี)</label>
+                            <div style="display:flex; gap:0.5rem;">
+                                <input type="number" class="form-control" placeholder="ขั้นต่ำ">
+                                <span style="align-self:center;">-</span>
+                                <input type="number" class="form-control" placeholder="สูงสุด">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label>เงินเดือนที่คาดหวัง</label>
+                            <select class="form-control">
+                                <option value="">ไม่ระบุ</option>
+                                <option value="15-20">15,000 - 20,000 บาท</option>
+                                <option value="20-30">20,000 - 30,000 บาท</option>
+                                <option value="30+">30,000 บาทขึ้นไป</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label>ทักษะเฉพาะทาง</label>
+                            <input type="text" class="form-control" placeholder="เช่น React, Python, SEO">
+                            <div style="display:flex; gap:0.5rem; margin-top:0.5rem; flex-wrap:wrap;">
+                                <span class="badge badge-active">React <i class="bx bx-x" style="cursor:pointer;"></i></span>
+                                <span class="badge badge-active">JavaScript <i class="bx bx-x" style="cursor:pointer;"></i></span>
+                            </div>
+                        </div>
+
+                        <button class="btn btn-primary btn-full" style="margin-top: 1rem;"><i class="bx bx-search"></i> ค้นหาผู้สมัคร</button>
+                    </div>
+
+                    <!-- Search Results -->
+                    <div>
+                        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom: 1.5rem;">
+                            <h2 style="font-size: 1.2rem;">ผลการค้นหา (254 รายการ)</h2>
+                            <select class="form-control" style="width: auto; padding: 6px 12px; font-size: 0.9rem;">
+                                <option>เรียงตามความสอดคล้อง</option>
+                                <option>อัปเดตล่าสุด</option>
+                                <option>ประสบการณ์สูงสุด</option>
+                            </select>
+                        </div>
+
+                        <div class="job-list">
+                            <!-- Mockup Candidate Card -->
+                            <div class="job-card">
+                                <div style="display: flex; gap: 1.5rem; align-items:center; width:100%;">
+                                    <div class="applicant-avatar" style="width: 64px; height: 64px; font-size: 1.5rem;">SM</div>
+                                    <div class="job-card-info">
+                                        <h3>สมปอง เก่งโค้ด <span class="badge badge-reviewing"><i class="bx bx-check-shield"></i> ยืนยันตัวตนแล้ว</span></h3>
+                                        <p style="color: var(--primary-light); font-weight:500; margin-bottom: 0.5rem;">Senior Front-End Developer (ประสบการณ์ 5 ปี)</p>
+                                        <div class="job-card-meta">
+                                            <span><i class="bx bx-map"></i> กรุงเทพมหานคร</span>
+                                            <span><i class="bx bx-money"></i> 55,000 - 65,000 บาท</span>
+                                            <span><i class="bx bx-building"></i> บ. เดิม: Tech startup Co.</span>
+                                        </div>
+                                        <div style="margin-top:0.8rem; display:flex; gap:0.5rem;">
+                                            <span class="badge badge-draft">#React</span>
+                                            <span class="badge badge-draft">#Vue</span>
+                                            <span class="badge badge-draft">#TypeScript</span>
+                                        </div>
+                                    </div>
+                                    <div style="display:flex; flex-direction:column; gap:0.5rem; flex-shrink:0;">
+                                        <button class="btn btn-primary btn-sm"><i class="bx bx-envelope"></i> ชวนให้สมัคร</button>
+                                        <button class="btn btn-outline btn-sm"><i class="bx bx-bookmark"></i> บันทึกเก็บไว้</button>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Mockup Candidate Card 2 -->
+                            <div class="job-card">
+                                <div style="display: flex; gap: 1.5rem; align-items:center; width:100%;">
+                                    <div class="applicant-avatar" style="width: 64px; height: 64px; font-size: 1.5rem; background: linear-gradient(135deg, #10b981, #059669);">NJ</div>
+                                    <div class="job-card-info">
+                                        <h3>นัชชา ดีไซเนอร์</h3>
+                                        <p style="color: var(--primary-light); font-weight:500; margin-bottom: 0.5rem;">UX/UI Designer (ประสบการณ์ 3 ปี)</p>
+                                        <div class="job-card-meta">
+                                            <span><i class="bx bx-map"></i> เชียงใหม่ (พร้อมย้าย)</span>
+                                            <span><i class="bx bx-money"></i> 35,000 บาท</span>
+                                            <span><i class="bx bx-building"></i> บ. เดิม: Creative Agency</span>
+                                        </div>
+                                        <div style="margin-top:0.8rem; display:flex; gap:0.5rem;">
+                                            <span class="badge badge-draft">#Figma</span>
+                                            <span class="badge badge-draft">#Design Thinking</span>
+                                            <span class="badge badge-draft">#Wireframing</span>
+                                        </div>
+                                    </div>
+                                    <div style="display:flex; flex-direction:column; gap:0.5rem; flex-shrink:0;">
+                                        <button class="btn btn-primary btn-sm"><i class="bx bx-envelope"></i> ชวนให้สมัคร</button>
+                                        <button class="btn btn-outline btn-sm"><i class="bx bx-bookmark"></i> บันทึกเก็บไว้</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="https://www.gstatic.com/firebasejs/12.12.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/12.12.0/firebase-auth-compat.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>

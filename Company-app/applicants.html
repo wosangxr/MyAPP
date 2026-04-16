@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ผู้สมัคร — Company Test</title>
+    <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body class="app-page">
+    <div class="bg-orbs"><div class="orb orb-1"></div><div class="orb orb-2"></div></div>
+    <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+    <div class="app-layout">
+        <nav class="sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <div class="logo"><i class="bx bx-buildings"></i><span>Company Test</span></div>
+                <button class="sidebar-close" id="sidebarClose"><i class="bx bx-x"></i></button>
+            </div>
+            <div class="sidebar-menu">
+                <a href="dashboard.html" class="menu-item" id="menuDashboard"><i class="bx bx-grid-alt"></i><span>Dashboard</span></a>
+                <a href="jobs.html" class="menu-item" id="menuJobs"><i class="bx bx-briefcase"></i><span>ประกาศงาน</span></a>
+                <a href="applicants.html" class="menu-item active" id="menuApplicants"><i class="bx bx-user-check"></i><span>ผู้สมัคร</span></a>
+                <a href="search.html" class="menu-item" id="menuSearch"><i class="bx bx-search-alt"></i><span>ค้นหาเรซูเม่</span></a>
+                <a href="profile.html" class="menu-item" id="menuProfile"><i class="bx bx-building-house"></i><span>โปรไฟล์บริษัท</span></a>
+                <a href="settings.html" class="menu-item" id="menuSettings"><i class="bx bx-cog"></i><span>ตั้งค่าองค์กร</span></a>
+            </div>
+            <div class="sidebar-footer">
+                <button id="themeToggle"><i class="bx bx-sun"></i><span id="btnThemeText">เปลี่ยนธีม</span></button>
+                <button id="sidebarLangToggle">EN</button>
+                <button class="logout-btn" id="logoutBtn"><i class="bx bx-log-out"></i><span id="btnLogoutText">ออกจากระบบ</span></button>
+            </div>
+        </nav>
+
+        <main class="main-content">
+            <header class="top-bar">
+                <button class="menu-toggle" id="menuToggle"><i class="bx bx-menu"></i></button>
+                <h1 class="page-title">ผู้สมัคร</h1>
+                <div class="user-info">
+                    <div class="avatar" id="userAvatar">C</div>
+                    <span id="userName">Company</span>
+                </div>
+            </header>
+
+            <div class="content-area">
+                <!-- Stats summary -->
+                <div class="stats-grid" id="applicantStats">
+                    <div class="stat-card">
+                        <div class="stat-icon purple"><i class="bx bx-user-plus"></i></div>
+                        <div class="stat-info">
+                            <h4 id="statTotalLabel">ใบสมัครทั้งหมด</h4>
+                            <div class="stat-number" id="totalApplicants">0</div>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon orange"><i class="bx bx-time-five"></i></div>
+                        <div class="stat-info">
+                            <h4 id="statPendingLabel">รอพิจารณา</h4>
+                            <div class="stat-number" id="pendingApplicants">0</div>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon blue"><i class="bx bx-conversation"></i></div>
+                        <div class="stat-info">
+                            <h4 id="statInterviewLabel">นัดสัมภาษณ์</h4>
+                            <div class="stat-number" id="interviewApplicants">0</div>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon green"><i class="bx bx-check-double"></i></div>
+                        <div class="stat-info">
+                            <h4 id="statHiredLabel">รับเข้าทำงาน</h4>
+                            <div class="stat-number" id="hiredApplicants">0</div>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon red"><i class="bx bx-user-x"></i></div>
+                        <div class="stat-info">
+                            <h4 id="statRejectedLabel">ไม่ผ่านเกณฑ์</h4>
+                            <div class="stat-number" id="rejectedApplicants">0</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Kanban Board -->
+                <div class="kanban-board-wrapper">
+                    <div class="kanban-board" id="kanbanBoard">
+                        <div class="kanban-column" data-status="pending" ondrop="Applicants.drop(event)" ondragover="Applicants.allowDrop(event)">
+                            <div class="kanban-header badge-pending">
+                                <h3 id="colNewText">New <span class="kanban-count" id="count-pending">0</span></h3>
+                            </div>
+                            <div class="kanban-cards" id="col-pending"></div>
+                        </div>
+                        <div class="kanban-column" data-status="reviewing" ondrop="Applicants.drop(event)" ondragover="Applicants.allowDrop(event)">
+                            <div class="kanban-header badge-reviewing">
+                                <h3 id="colScreenedText">Screened <span class="kanban-count" id="count-reviewing">0</span></h3>
+                            </div>
+                            <div class="kanban-cards" id="col-reviewing"></div>
+                        </div>
+                        <div class="kanban-column" data-status="interview" ondrop="Applicants.drop(event)" ondragover="Applicants.allowDrop(event)">
+                            <div class="kanban-header badge-interview">
+                                <h3 id="colInterviewingText">Interviewing <span class="kanban-count" id="count-interview">0</span></h3>
+                            </div>
+                            <div class="kanban-cards" id="col-interview"></div>
+                        </div>
+                        <div class="kanban-column" data-status="accepted" ondrop="Applicants.drop(event)" ondragover="Applicants.allowDrop(event)">
+                            <div class="kanban-header badge-accepted">
+                                <h3 id="colOfferedText">Offered <span class="kanban-count" id="count-accepted">0</span></h3>
+                            </div>
+                            <div class="kanban-cards" id="col-accepted"></div>
+                        </div>
+                        <div class="kanban-column" data-status="hired" ondrop="Applicants.drop(event)" ondragover="Applicants.allowDrop(event)">
+                            <div class="kanban-header badge-hired">
+                                <h3 id="colHiredText">Hired <span class="kanban-count" id="count-hired">0</span></h3>
+                            </div>
+                            <div class="kanban-cards" id="col-hired"></div>
+                        </div>
+                        <div class="kanban-column" data-status="rejected" ondrop="Applicants.drop(event)" ondragover="Applicants.allowDrop(event)">
+                            <div class="kanban-header badge-rejected">
+                                <h3 id="colRejectedText">Rejected <span class="kanban-count" id="count-rejected">0</span></h3>
+                            </div>
+                            <div class="kanban-cards" id="col-rejected"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <div id="toast" class="toast">
+        <i class="bx bx-check-circle"></i>
+        <div class="toast-content"><h4>สำเร็จ!</h4><p id="toastMessage"></p></div>
+    </div>
+
+    <!-- Applicant Drawer (Right side view) -->
+    <div class="drawer-overlay" id="applicantDrawerOverlay"></div>
+    <div class="applicant-drawer" id="applicantDrawer">
+        <div class="drawer-header">
+            <h2>รายละเอียดผู้สมัคร (Resume)</h2>
+            <button class="drawer-close" id="closeDrawerBtn"><i class="bx bx-x"></i></button>
+        </div>
+        <div class="drawer-body" id="drawerBodyContent">
+            <div class="loading"><div class="spinner"></div></div>
+        </div>
+    </div>
+
+    <script src="https://www.gstatic.com/firebasejs/12.12.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/12.12.0/firebase-auth-compat.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>

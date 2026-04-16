@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ประกาศงาน — Company Test</title>
+    <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body class="app-page">
+    <div class="bg-orbs"><div class="orb orb-1"></div><div class="orb orb-2"></div></div>
+    <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+    <div class="app-layout">
+        <nav class="sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <div class="logo"><i class="bx bx-buildings"></i><span>Company Test</span></div>
+                <button class="sidebar-close" id="sidebarClose"><i class="bx bx-x"></i></button>
+            </div>
+            <div class="sidebar-menu">
+                <a href="dashboard.html" class="menu-item" id="menuDashboard"><i class="bx bx-grid-alt"></i><span>Dashboard</span></a>
+                <a href="jobs.html" class="menu-item active" id="menuJobs"><i class="bx bx-briefcase"></i><span>ประกาศงาน</span></a>
+                <a href="applicants.html" class="menu-item" id="menuApplicants"><i class="bx bx-user-check"></i><span>ผู้สมัคร</span></a>
+                <a href="search.html" class="menu-item" id="menuSearch"><i class="bx bx-search-alt"></i><span>ค้นหาเรซูเม่</span></a>
+                <a href="profile.html" class="menu-item" id="menuProfile"><i class="bx bx-building-house"></i><span>โปรไฟล์บริษัท</span></a>
+                <a href="settings.html" class="menu-item" id="menuSettings"><i class="bx bx-cog"></i><span>ตั้งค่าองค์กร</span></a>
+            </div>
+            <div class="sidebar-footer">
+                <button id="themeToggle"><i class="bx bx-sun"></i><span id="btnThemeText">เปลี่ยนธีม</span></button>
+                <button id="sidebarLangToggle">EN</button>
+                <button class="logout-btn" id="logoutBtn"><i class="bx bx-log-out"></i><span id="btnLogoutText">ออกจากระบบ</span></button>
+            </div>
+
+        </nav>
+
+        <main class="main-content">
+            <header class="top-bar">
+                <button class="menu-toggle" id="menuToggle"><i class="bx bx-menu"></i></button>
+                <h1 class="page-title">ประกาศงาน</h1>
+                <div class="user-info">
+                    <div class="avatar" id="userAvatar">C</div>
+                    <span id="userName">Company</span>
+                </div>
+            </header>
+
+            <div class="content-area">
+                <!-- Filter + Add button -->
+                <div class="filter-bar">
+                    <input type="text" class="form-control" id="jobSearch" placeholder="ค้นหาตำแหน่งงาน...">
+                    <button class="filter-pill active" data-filter="all">ทั้งหมด</button>
+                    <button class="filter-pill" data-filter="active">เปิดรับ</button>
+                    <button class="filter-pill" data-filter="closed">ปิดรับ</button>
+                    <button class="filter-pill" data-filter="draft">ฉบับร่าง</button>
+                    <button class="btn btn-primary" id="addJobBtn" style="margin-left: auto;">
+                        <i class="bx bx-plus"></i> สร้างประกาศงาน
+                    </button>
+                </div>
+
+                <!-- Job List -->
+                <div class="job-list" id="jobList">
+                    <div class="loading"><div class="spinner"></div></div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Create/Edit Job Modal -->
+    <div class="modal-overlay" id="jobModal">
+        <div class="modal">
+            <div class="modal-header">
+                <h2><i class="bx bx-edit"></i> <span id="modalTitle">สร้างประกาศงานใหม่</span></h2>
+                <button class="modal-close" id="closeJobModal"><i class="bx bx-x"></i></button>
+            </div>
+            <form id="jobForm">
+                <input type="hidden" id="jobId">
+                <div class="form-group">
+                    <label for="jobTitle">ชื่อตำแหน่งงาน *</label>
+                    <input type="text" class="form-control" id="jobTitle" placeholder="เช่น Full Stack Developer" required>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="jobType">ประเภทงาน</label>
+                        <select class="form-control" id="jobType">
+                            <option value="full-time">งานประจำ (Full-time)</option>
+                            <option value="part-time">พาร์ทไทม์ (Part-time)</option>
+                            <option value="contract">สัญญาจ้าง (Contract)</option>
+                            <option value="internship">ฝึกงาน (Internship)</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="jobRemote">รูปแบบการทำงาน</label>
+                        <select class="form-control" id="jobRemote">
+                            <option value="onsite">ทำงานที่ออฟฟิศ (Onsite)</option>
+                            <option value="remote">ทำงานทางไกล (Remote)</option>
+                            <option value="hybrid">ผสม (Hybrid)</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="jobLocation">สถานที่ทำงาน</label>
+                    <input type="text" class="form-control" id="jobLocation" placeholder="เช่น กรุงเทพฯ, ลาดพร้าว">
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="jobSalaryMin">เงินเดือนขั้นต่ำ (บาท)</label>
+                        <input type="number" class="form-control" id="jobSalaryMin" placeholder="15000">
+                    </div>
+                    <div class="form-group">
+                        <label for="jobSalaryMax">เงินเดือนสูงสุด (บาท)</label>
+                        <input type="number" class="form-control" id="jobSalaryMax" placeholder="40000">
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="jobCategory">หมวดหมู่</label>
+                        <select class="form-control" id="jobCategory">
+                            <option value="IT">IT / เทคโนโลยี</option>
+                            <option value="Marketing">การตลาด</option>
+                            <option value="Design">ออกแบบ / กราฟิก</option>
+                            <option value="Sales">ขาย / ธุรกิจ</option>
+                            <option value="Finance">การเงิน / บัญชี</option>
+                            <option value="HR">ทรัพยากรบุคคล</option>
+                            <option value="Operations">ปฏิบัติการ</option>
+                            <option value="Other">อื่นๆ</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="jobExperience">ระดับประสบการณ์</label>
+                        <select class="form-control" id="jobExperience">
+                            <option value="entry">เพิ่งจบ / ไม่มีประสบการณ์</option>
+                            <option value="mid">1-3 ปี</option>
+                            <option value="senior">3 ปีขึ้นไป</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="jobDescription">รายละเอียดงาน</label>
+                    <textarea class="form-control" id="jobDescription" rows="4" placeholder="อธิบายรายละเอียดตำแหน่งงาน..."></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="jobRequirements">คุณสมบัติที่ต้องการ</label>
+                    <textarea class="form-control" id="jobRequirements" rows="3" placeholder="คุณสมบัติและทักษะที่จำเป็น..."></textarea>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-ghost" id="cancelJobModal">ยกเลิก</button>
+                    <button type="submit" class="btn btn-primary"><i class="bx bx-check"></i> บันทึก</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div id="toast" class="toast">
+        <i class="bx bx-check-circle"></i>
+        <div class="toast-content"><h4>สำเร็จ!</h4><p id="toastMessage"></p></div>
+    </div>
+
+    <script src="https://www.gstatic.com/firebasejs/12.12.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/12.12.0/firebase-auth-compat.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>

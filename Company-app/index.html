@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Company Test — แพลตฟอร์มหาคนทำงาน</title>
+    <meta name="description" content="แพลตฟอร์มสำหรับบริษัทลงประกาศรับสมัครงาน จัดการใบสมัคร และหาคนที่ใช่ให้กับองค์กรของคุณ">
+    <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body class="login-page">
+    <div class="bg-orbs">
+        <div class="orb orb-1"></div>
+        <div class="orb orb-2"></div>
+        <div class="orb orb-3"></div>
+        <div class="orb orb-4"></div>
+    </div>
+
+    <div class="login-wrapper">
+        <!-- Language Switcher -->
+        <div class="lang-switcher-wrapper">
+            <button class="lang-btn active" id="langTH" onclick="Auth.switchLanguage('th')">TH</button>
+            <button class="lang-btn" id="langEN" onclick="Auth.switchLanguage('en')">EN</button>
+        </div>
+
+        <div class="login-card glass-card">
+            <div class="login-brand">
+
+                <div class="brand-icon">
+                    <i class="bx bx-buildings"></i>
+                </div>
+                <h1>Company Test</h1>
+                <p>แพลตฟอร์มสำหรับบริษัทหาคนที่ใช่</p>
+            </div>
+
+            <div class="auth-tabs" style="display: flex; justify-content: center; margin-bottom: 2rem;">
+                <h2 id="loginTitle" style="font-size: 1.25rem;">เข้าสู่ระบบองค์กร</h2>
+            </div>
+
+
+            <!-- LOGIN FORM -->
+            <div class="auth-panel" id="loginPanel">
+                <div class="form-group">
+                    <label class="form-label" id="labelEmail" style="display: block; margin-bottom: 0.5rem; font-size: 0.9rem; color: var(--text-muted); text-align: left;">อีเมลองค์กร (Business Email)</label>
+                    <div class="input-icon-wrapper" style="padding: 0.25rem 0;">
+                        <i class="bx bx-envelope"></i>
+                        <input type="email" id="loginEmail" placeholder="name@company.com" autocomplete="email" value="hr@email.com" style="padding: 1rem 1rem 1rem 3rem; font-size: 1rem;">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                     <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem;">
+                        <label class="form-label" id="labelPassword" style="font-size: 0.9rem; color: var(--text-muted);">รหัสผ่าน (Password)</label>
+                        <a href="#" id="forgotPasswordLink" style="font-size: 0.85rem; color: var(--primary); text-decoration: none;">ลืมรหัสผ่าน?</a>
+                    </div>
+                    <div class="input-icon-wrapper" style="padding: 0.25rem 0;">
+                        <i class="bx bx-lock-alt"></i>
+                        <input type="password" id="loginPassword" placeholder="รหัสผ่าน" autocomplete="current-password" value="123456" style="padding: 1rem 1rem 1rem 3rem; font-size: 1rem;">
+                    </div>
+                </div>
+
+                <div id="loginError" class="auth-error"></div>
+                <button class="btn btn-primary btn-full" id="loginEmailBtn">
+                    <i class="bx bx-log-in"></i>
+                    <span id="btnText">เข้าสู่ระบบ</span>
+                </button>
+
+            </div>
+
+            <div class="login-footer">
+                <p id="footerText">ระบบจัดการผู้สมัครสำหรับ HR มืออาชีพ</p>
+            </div>
+
+        </div>
+    </div>
+
+
+    <div id="toast" class="toast">
+        <i class="bx bx-check-circle"></i>
+        <div class="toast-content">
+            <h4>สำเร็จ!</h4>
+            <p id="toastMessage">ดำเนินการเรียบร้อยแล้ว</p>
+        </div>
+    </div>
+
+    <!-- Firebase SDK (v12.12.0) -->
+    <script src="https://www.gstatic.com/firebasejs/12.12.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/12.12.0/firebase-auth-compat.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>
