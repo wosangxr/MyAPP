@@ -42,14 +42,14 @@ app.use("/api/favorites", require("./routes/favorites"));
 app.use("/api/stats", require("./routes/stats"));
 
 // ── Start Server ──
-const port = process.env.PORT || 3001;
+const PORT = process.env.PORT || 5000;
 
 const start = async () => {
   // Connect to MongoDB
   const dbConnected = await connectDB();
 
-  app.listen(port, () => {
-    console.log(`\n🚀 HelpAPP Backend running on http://localhost:${port}`);
+  app.listen(PORT, () => {
+    console.log(`\n🚀 HelpAPP Backend running on port ${PORT}`);
     console.log(`📦 MongoDB: ${dbConnected ? "Connected" : "Not configured"}`);
     console.log(`🔐 Admin: ${process.env.ADMIN_EMAIL || "admin@helpapp.com"}`);
     console.log(`───────────────────────────────────────\n`);
